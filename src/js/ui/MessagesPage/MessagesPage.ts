@@ -2,22 +2,20 @@ import { Http } from "client/http/Http";
 import { Settings } from "store/Settings";
 import { MessageDto } from "structures/dto/Message";
 import { markdown } from "utils/drawdown";
-
 declare const msgPage: Qml.Page & { channelId?: string };
 declare const msgListModel: Qml.ListModel;
 declare const msgListView: Qml.ListView;
 declare const sendButton: Qml.ToolButton;
 declare const inputField: Qml.TextArea;
 declare const msgListItem: Qml.Component;
-
+const dscproxyaddr = Settings.get("proxydsc");
 const URL_REGEXP = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/g;
-
 function sendMessage(content: string) {
     inputField.text = "";
-    Http.request<MessageDto[]>({
+    Http.request<MessageDto[]>({   
         method: "POST",
-        path: `https://discord.com/api/v9/channels/${msgPage.channelId}/messages`,
-        body: JSON.stringify({ content }),
+        path: `http://${dscproxyaddr}/api/v9/channels/${msgPage.channelId}/messages`,
+        body: `{\"content\":\"${content}\"}`
     }, (err, messages) => null);
 }
 
@@ -36,7 +34,6 @@ function appendMessage(msg: MessageDto) {
             return attachment.url + `?width=${width}&height=${height}`;
         })
         .map(url => url.replace("https://cdn.discordapp.com", `http://${cdnProxyUrl}`));
-
     msgListModel.append({
         username: msg.author.username,
         userId: msg.author.id,
@@ -54,11 +51,12 @@ function loadMessages() {
     msgListModel.clear();
     Http.request<MessageDto[]>({
         method: "GET",
-        path: `https://discord.com/api/v9/channels/${msgPage.channelId}/messages?limit=50`,
+        path: `http://${dscproxyaddr}/api/v9/channels/${msgPage.channelId}/messages?limit=50`,
     }, (err, messages) => {
         if (err || !messages) return;
         messages.reverse().forEach(msg => appendMessage(msg));
         msgListView.positionViewAtIndex(messages.length - 1, ListView.End);
+        
     });
 }
 

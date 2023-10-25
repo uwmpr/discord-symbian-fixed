@@ -51,7 +51,7 @@ export class SocketManager {
             this.client.emit("debug", "Received payload: " + msg);
             this.handlePayload(JSON.parse(msg));
         } catch (e) {
-            this.client.emit("error", e);
+            this.client.emit("error", e as Error);
         }
     };
 

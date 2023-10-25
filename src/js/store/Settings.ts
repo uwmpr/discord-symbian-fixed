@@ -4,6 +4,7 @@ export const defaultSettings: Settings = {
     autoConnect: false,
     cdnProxyUrl: "discord.ruzik.xyz:80",
     proxyUrl: "discord.ruzik.xyz:8471",
+    proxydsc: ""
 };
 
 export type Settings = {
@@ -12,6 +13,7 @@ export type Settings = {
     autoConnect: boolean
     cdnProxyUrl: string
     proxyUrl: string
+    proxydsc: string
 };
 
 export const Settings = {

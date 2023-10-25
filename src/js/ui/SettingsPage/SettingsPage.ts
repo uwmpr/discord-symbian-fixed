@@ -6,6 +6,7 @@ declare const cdnProxyUrlItem: Qml.ListItem;
 declare const proxyUrlItem: Qml.ListItem;
 declare const dialogField: Qml.TextField;
 declare const debugModeItem: Qml.SelectionListItem;
+declare const proxydscItem: Qml.ListItem;
 
 function loadSettings() {
     debugModeItem.subTitle = Settings.get("debug") ? "Enabled" : "Disabled";
@@ -42,6 +43,13 @@ function handleReady() {
         dialogField.text = Settings.get("proxyUrl") ?? "";
         dialogField.placeholderText = "hostname:port";
         property = "proxyUrl";
+        dialog.open();
+    });
+        proxydscItem.clicked.connect(() => {
+        dialog.titleText = "discord proxy url";
+        dialogField.text = Settings.get("proxydsc") ?? "";
+        dialogField.placeholderText = "hostname:port";
+        property = "proxydsc";
         dialog.open();
     });
 

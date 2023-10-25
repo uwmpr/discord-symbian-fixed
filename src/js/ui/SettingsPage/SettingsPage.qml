@@ -83,7 +83,22 @@ Page {
                     }
                 }
             }
-    
+            ListItem {
+                id: proxydscItem
+                Column {
+                    anchors.fill: proxydscItem.paddingItem
+                    ListItemText {
+                        mode: proxydscItem.mode
+                        role: "Title"
+                        text: "discord proxy"
+                    }
+                    ListItemText {
+                        mode: proxydscItem.mode
+                        role: "SubTitle"
+                        text: "Hostname and port of the Discord server proxy"
+                    }
+                }
+            } 
             SelectionListItem {
                 id: debugModeItem
                 title: "Debug mode"
