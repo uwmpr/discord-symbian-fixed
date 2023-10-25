@@ -3,10 +3,12 @@
 Based on Qt 4.7.4 using QML widgets. Most of the code is in TypeScript, which then compiles to QML-compatible JavaScript.
 
 WARNING!!!!!
+
 if you use this your discord account can be banned. 
  
 
-this usees unsecure http connection any data messages, token etc. are not encrypted your data may be stolen
+this uses unsecure http connection any data messages, token etc. are not encrypted your data may be stolen
+
 WARNING!!!!
 
 
