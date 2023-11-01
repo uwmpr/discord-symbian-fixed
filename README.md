@@ -12,10 +12,11 @@ this uses unsecure http connection any data messages, token etc. are not encrypt
 WARNING!!!!
 
 
-what works?
+what working?
 - sending messages
 - receving messages
 - notifications
+- opening link in the browser
 
 what doesn't work?
 - receiving attachment
