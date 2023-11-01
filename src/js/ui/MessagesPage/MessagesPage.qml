@@ -79,10 +79,7 @@ Page {
                 color: palette.text
                 textFormat: Text.RichText
                 wrapMode: Text.WrapAnywhere
-                onLinkActivated: function(url) {
-                    console.log(url);
-                    Qt.openUrlExternally(url);
-                }
+                onLinkActivated: Qt.openUrlExternally(link)
             }
         }
     }
