@@ -92,7 +92,14 @@ Page {
                 smooth: true
                 source: imgurl
                 visible: imgurl !== ""
-                
+                MouseArea {
+                    anchors.fill: parent
+                    
+                    onClicked: {
+                        Qt.openUrlExternally(imgurl)
+                        
+                       
+                }}
             }   
 
 

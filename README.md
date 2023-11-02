@@ -17,10 +17,10 @@ what working?
 - receving messages
 - notifications
 - opening link in the browser
-
+- receiving images(preview, open in browser)
 what doesn't work?
-- receiving attachment
-- and other
+- receiving other attachments
+- and others
 
 tutorial for proxies [here](https://github.com/uwmpr/discord-symbian-fixed/blob/master/dscproxysetup.md)
 The client requires a middleware/proxy server running somewhere, see [discord-symbian-server](https://github.com/ruslang02/discord-symbian-server).
