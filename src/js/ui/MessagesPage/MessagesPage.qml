@@ -33,17 +33,16 @@ Page {
         anchors.leftMargin: 0
         anchors.bottom: inputPanel.top
 
-        spacing: 10
 
+        spacing: 12
         model: msgListModel
         delegate: Column {
             id: msgListItem
             width: msgListView.width
             spacing: 5
 
-            Component.onCompleted: Js.handleMessageReady()
 
-            Row {
+            Row {   
                 height: 20
                 spacing: 5
                 Image {
@@ -71,8 +70,9 @@ Page {
                     color: palette.text
                 }
             }
-
+            
             Text {
+                
                 text: content
                 font.pixelSize: 16
                 width: msgListView.width
@@ -80,9 +80,33 @@ Page {
                 textFormat: Text.RichText
                 wrapMode: Text.WrapAnywhere
                 onLinkActivated: Qt.openUrlExternally(link)
-            }
+                }
+                      
+
+        Loader {
+            sourceComponent: Image {
+                fillMode: Image.PreserveAspectFit
+                sourceSize.width: 200
+                sourceSize.height: 200
+                
+                smooth: true
+                source: imgurl
+                visible: imgurl !== ""
+                
+            }   
+
+
+        
         }
+               
+        
+            
+              
     }
+}
+    
+
+
     Item {
         id: inputPanel
         height: 48

@@ -34,6 +34,8 @@ function appendMessage(msg: MessageDto) {
             return attachment.url + `?width=${width}&height=${height}`;
         })
         .map(url => url.replace("https://cdn.discordapp.com", `http://${cdnProxyUrl}`));
+    const imageurl = attachments.toString();
+
     msgListModel.append({
         username: msg.author.username,
         userId: msg.author.id,
@@ -41,9 +43,11 @@ function appendMessage(msg: MessageDto) {
             ? `http://${cdnProxyUrl}/avatars/${msg.author.id}/${msg.author.avatar}.jpg?size=40`
             : `http://${cdnProxyUrl}/embed/avatars${+msg.author.discriminator % 5}.png`,
         content: markdown(msg.content).replace(URL_REGEXP, url => `<a href='${url}'>${url}</a>`),
+        voicemessurl: "commingsoon!",
         time: Qt.formatDateTime(date, "h:mm:ss AP, dd.MM.yyyy"),
-        attachments: JSON.stringify(attachments),
+        imgurl: imageurl
     });
+    
 
 }
 
@@ -84,22 +88,4 @@ function handleReady() {
     });
 }
 
-function handleMessageReady(attachments: string) {
-    const attachmentsArr: string[] = JSON.parse(attachments);
 
-    attachmentsArr.forEach(url =>
-        Qt.createQmlObject(`
-            import QtQuick 1.1;
-            Image { 
-                fillMode: Image.PreserveAspectFit; 
-                width: parent.width - 50; 
-                smooth: true; 
-                source: "${url}";
-            }
-        `, msgListItem)
-    );
-}
-
-function handleDestroyed() {
-    window.client.off("message", handleMessage);
-}
