@@ -18,6 +18,8 @@ what working?
 - notifications
 - opening link in the browser
 - receiving images(preview, open in browser)
+
+
 what doesn't work?
 - receiving other attachments
 - and others
