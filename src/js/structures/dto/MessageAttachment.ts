@@ -4,4 +4,6 @@ export interface MessageAttachmentDto {
     height: number
     width: number
     content_type: string
+    filename: string
+
 }

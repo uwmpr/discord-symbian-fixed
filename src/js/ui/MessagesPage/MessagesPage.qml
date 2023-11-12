@@ -1,6 +1,8 @@
 import QtQuick 1.1
 import com.nokia.symbian 1.1
 import "MessagesPage.js" as Js
+import QtQuick 1.0
+
 
 Page {
     property string channelId;
@@ -105,7 +107,24 @@ Page {
 
         
         }
-               
+        Rectangle {
+            width: 250
+            height: 45
+            color: "gray"
+            visible: Fileurl !== ""
+            Image {
+                fillMode: Image.PreserveAspectFit
+                sourceSize.width: 30
+                sourceSize.height: 30
+                source: "download.svg"
+            }
+            
+            Text {
+                text: FileName
+                anchors.centerIn: parent
+            }
+        }
+        
         
             
               

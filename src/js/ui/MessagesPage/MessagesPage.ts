@@ -9,6 +9,15 @@ declare const sendButton: Qml.ToolButton;
 declare const inputField: Qml.TextArea;
 declare const msgListItem: Qml.Component;
 const dscproxyaddr = Settings.get("proxydsc");
+function endsWith(str: string, suffixes: string[]) {
+    for (var i = 0; i < suffixes.length; i++) {
+        var suffix = suffixes[i];
+        if (str.indexOf(suffix, str.length - suffix.length) !== -1) {
+            return true;
+        }
+    }
+    return false;
+}
 const URL_REGEXP = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/g;
 function sendMessage(content: string) {
     inputField.text = "";
@@ -25,17 +34,30 @@ function appendMessage(msg: MessageDto) {
     const [year, month, day] = splitTimestamp[0].split("-");
     const [hour, minute, second] = splitTimestamp[1].split(".")[0].split(":");
     const date = new Date(+year, (+month) - 1, +day, +hour, +minute, +second);
+    var imgurl;
+    var Fileurl;
+    var FileName;
 
     const attachments = msg.attachments
         .map(attachment => {
             const width = Math.min(attachment.width, window.width - 50);
             const height = Math.floor(attachment.height / (attachment.width / width));
-
-            return attachment.url + `?width=${width}&height=${height}`;
+            FileName = attachment.filename
+            if (endsWith(attachment.filename, [".svg", ".jpg", ".jpeg", ".png", ".bmp"])) {
+                
+                return attachment.url + `?width=${width}&height=${height}`;
+            } else {
+                return attachment.url ;
+            }
         })
         .map(url => url.replace("https://cdn.discordapp.com", `http://${cdnProxyUrl}`));
-    const imageurl = attachments.toString();
-
+        if (endsWith(attachments.toString(), [".svg", ".jpg", ".jpeg", ".png", ".bmp"])) {
+                imgurl = attachments.toString();
+            
+        } else {
+            Fileurl = attachments.toString();
+        }
+    
     msgListModel.append({
         username: msg.author.username,
         userId: msg.author.id,
@@ -45,7 +67,9 @@ function appendMessage(msg: MessageDto) {
         content: markdown(msg.content).replace(URL_REGEXP, url => `<a href='${url}'>${url}</a>`),
         voicemessurl: "commingsoon!",
         time: Qt.formatDateTime(date, "h:mm:ss AP, dd.MM.yyyy"),
-        imgurl: imageurl
+        imgurl,
+        Fileurl,
+        FileName
     });
     
 
