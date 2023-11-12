@@ -5,5 +5,4 @@ export interface MessageAttachmentDto {
     width: number
     content_type: string
     filename: string
-
 }

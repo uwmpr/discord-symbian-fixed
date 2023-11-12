@@ -34,42 +34,44 @@ function appendMessage(msg: MessageDto) {
     const [year, month, day] = splitTimestamp[0].split("-");
     const [hour, minute, second] = splitTimestamp[1].split(".")[0].split(":");
     const date = new Date(+year, (+month) - 1, +day, +hour, +minute, +second);
-    var imgurl;
-    var Fileurl;
-    var FileName;
+    var imgurl = "";
+    var Fileurl = "";
+    var FileName = "";
+    
 
     const attachments = msg.attachments
         .map(attachment => {
             const width = Math.min(attachment.width, window.width - 50);
             const height = Math.floor(attachment.height / (attachment.width / width));
-            FileName = attachment.filename
+            
             if (endsWith(attachment.filename, [".svg", ".jpg", ".jpeg", ".png", ".bmp"])) {
-                
-                return attachment.url + `?width=${width}&height=${height}`;
+                imgurl = attachment.url.toString().replace("https://cdn.discordapp.com", `http://${cdnProxyUrl}`);
+                return attachment.url.toString() + `?width=${width}&height=${height}`;
             } else {
-                return attachment.url ;
+                FileName = attachment.filename.toString();
+                return attachment.url.toString() ;
             }
         })
         .map(url => url.replace("https://cdn.discordapp.com", `http://${cdnProxyUrl}`));
-        if (endsWith(attachments.toString(), [".svg", ".jpg", ".jpeg", ".png", ".bmp"])) {
-                imgurl = attachments.toString();
-            
-        } else {
-            Fileurl = attachments.toString();
+    function filecheck(){
+        if (FileName !== ""){
+            return attachments;
+        }else{
+            return "";
         }
-    
+    }
+    console.log(imgurl)
     msgListModel.append({
         username: msg.author.username,
         userId: msg.author.id,
         userAvatar: msg.author.avatar
             ? `http://${cdnProxyUrl}/avatars/${msg.author.id}/${msg.author.avatar}.jpg?size=40`
             : `http://${cdnProxyUrl}/embed/avatars${+msg.author.discriminator % 5}.png`,
-        content: markdown(msg.content).replace(URL_REGEXP, url => `<a href='${url}'>${url}</a>`),
+        content: markdown(msg.content + filecheck()).replace(URL_REGEXP, url => `<a href='${url}'>${url}</a>`),
         voicemessurl: "commingsoon!",
         time: Qt.formatDateTime(date, "h:mm:ss AP, dd.MM.yyyy"),
         imgurl,
-        Fileurl,
-        FileName
+        
     });
     
 
