@@ -46,3 +46,6 @@ void AvkonHelper::init(){
 
 
 }
+void AvkonHelper::clearAllNot(){
+    api.removeAllNotifications();
+}

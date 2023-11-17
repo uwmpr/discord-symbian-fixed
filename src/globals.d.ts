@@ -12,6 +12,7 @@ interface Socket {
 interface AvkonHelper {
     minimize(): void
     showPopup(title: string, message: string): void
+    clearAllNot(): void
 }
 
 interface HttpClient {

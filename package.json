@@ -16,7 +16,7 @@
     "author": "Ruslan Garifullin <ruslan.g2002@gmail.com>",
     "license": "GPL-3.0",
     "dependencies": {
-        "typescript": "^4.3.5"
+        "typescript": "^4.9.5"
     },
     "devDependencies": {
         "@commitlint/cli": "^13.1.0",

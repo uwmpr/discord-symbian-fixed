@@ -7,6 +7,7 @@ declare const loginButton: Qml.ToolButton;
 declare const settingsButton: Qml.ToolButton;
 declare const menuButton: Qml.ToolButton;
 declare const minimizeButton: Qml.ToolButton;
+declare const clearAllNotBut: Qml.ToolButton;
 declare const menu: Qml.Menu;
 declare const banner: Qml.InfoBanner;
 declare const symbian: Qml.Symbian;
@@ -44,6 +45,8 @@ function handleReady() {
         }
     });
 
+    
+
     settingsButton.clicked.connect(() => {
         window.pageStack.push(
             Qt.resolvedUrl("SettingsPage/SettingsPage.qml")
@@ -56,6 +59,9 @@ function handleReady() {
 
     minimizeButton.clicked.connect(() => {
         avkon.minimize();
+    });
+    clearAllNotBut.clicked.connect(() => {
+        avkon.clearAllNot();
     });
 
     window.client.on("ready", () => {

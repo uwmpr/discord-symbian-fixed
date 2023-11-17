@@ -18,6 +18,7 @@ public:
     Q_INVOKABLE void minimize() const;
     void init();
     void log(QString str);
+    Q_INVOKABLE void clearAllNot();
 public slots:
         void cleanLastMsg() { lastPopup=""; }
 

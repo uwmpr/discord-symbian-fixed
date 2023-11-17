@@ -15,8 +15,12 @@ PageStackWindow {
         id: menu
         content: MenuLayout {
             MenuItem {
+                id: clearAllNotBut
+                text: "clear all notifications"
+            }
+            MenuItem {
                 id: loginButton
-                text: "Sign in"
+                text: "spadaj"
             }
             MenuItem {
                 id: settingsButton
