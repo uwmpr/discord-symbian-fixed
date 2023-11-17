@@ -15,6 +15,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     Socket socket;
     Http http;
     AvkonHelper avkon(&viewer);
+    avkon.init();
     viewer.rootContext()->setContextProperty("http", &http);
     viewer.rootContext()->setContextProperty("avkon", &avkon);
     viewer.rootContext()->setContextProperty("socket", &socket);

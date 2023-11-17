@@ -4,7 +4,7 @@ TARGET.UID3 = 0xEA2EE72D
 TARGET.CAPABILITY += NetworkServices
 TARGET.EPOCHEAPSIZE = 0x40000 0x4000000
 
-VERSION = 1.0.0
+VERSION = 0.2.2
 DEFINES += APP_VERSION=\"$$VERSION\"
 
 vendorinfo += "%{\"ruslang02\"}" ":\"ruslang02\""
@@ -37,6 +37,7 @@ SOURCES += \
     src/cpp/AvkonHelper.cpp
 
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
+include(pigler/qt-library/pigler.pri)
 qtcAddDeployment()
 
 !win32-g++ {
@@ -63,3 +64,5 @@ qtcAddDeployment()
             -lbafl \
             -lmgfetch
 }
+
+OTHER_FILES += logo.png \

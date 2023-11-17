@@ -1,0 +1,3 @@
+[submodule "pigler"]
+	path = pigler
+	url = https://github.com/piglerorg/pigler.git
