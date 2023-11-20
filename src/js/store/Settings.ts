@@ -2,9 +2,9 @@ export const defaultSettings: Settings = {
     token: "",
     debug: false,
     autoConnect: false,
-    cdnProxyUrl: "discord.ruzik.xyz:80",
-    proxyUrl: "discord.ruzik.xyz:8471",
-    proxydsc: ""
+    cdnProxyUrl: "cdndsc.uwmpr.pl:80",
+    proxyUrl: "uwmpr.pl:8080",
+    proxydsc: "discord.uwmpr.pl:80"
 };
 
 export type Settings = {

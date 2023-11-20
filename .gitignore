@@ -14,3 +14,5 @@ moc/
 node_modules/
 *.autosave
 Makefile
+*.mk
+ABLD.BAT

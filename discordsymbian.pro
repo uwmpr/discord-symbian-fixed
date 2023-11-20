@@ -28,7 +28,8 @@ DEPLOYMENTFOLDERS = folder_01
 HEADERS += \
     src/cpp/Socket.h \
     src/cpp/Http.h \
-    src/cpp/AvkonHelper.h
+    src/cpp/AvkonHelper.h \
+    pigler/sym-library/inc/PinglerAPI.h
 
 SOURCES += \
     src/main.cpp \
@@ -38,6 +39,7 @@ SOURCES += \
 
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 include(pigler/qt-library/pigler.pri)
+include(qtwebsockets/qtwebsocket.pri)
 qtcAddDeployment()
 
 !win32-g++ {

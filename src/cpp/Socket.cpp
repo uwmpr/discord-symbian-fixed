@@ -18,6 +18,7 @@ void Socket::sslHandshakeFailure(QList<QSslError> errors) {
 
 void Socket::readyRead() {
     QByteArray data = socket->readAll();
+    qDebug() << data;
     QList<QByteArray> msgs = data.split('\n');
     if (msgs.length() == 1) {
         buffer->append(data);
@@ -32,6 +33,7 @@ void Socket::readyRead() {
 }
 
 void Socket::connectToServer(QString host, int port) {
+    qDebug() << host << port;
     socket = new QSslSocket(this);
     connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(error(QAbstractSocket::SocketError)));
     connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
@@ -44,5 +46,6 @@ void Socket::connectToServer(QString host, int port) {
 }
 
 void Socket::send(QString message) {
+    qDebug() << message;
     socket->write((message + "\n").toUtf8());
 }
