@@ -39,7 +39,6 @@ SOURCES += \
 
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 include(pigler/qt-library/pigler.pri)
-include(qtwebsockets/qtwebsocket.pri)
 qtcAddDeployment()
 
 !win32-g++ {
@@ -68,3 +67,6 @@ qtcAddDeployment()
 }
 
 OTHER_FILES += logo.png \
+
+RESOURCES += \
+    res.qrc

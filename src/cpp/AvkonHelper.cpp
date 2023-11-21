@@ -31,7 +31,7 @@ void AvkonHelper::showPopup(QString title, QString message) {
     qint32 uid = api.createNotification(title, message);
 
             if(uid > 0) {
-                static QImage piglerImage("logo.png");
+                static QImage piglerImage(":/assets/logo.png");
                 api.setNotificationIcon(uid, piglerImage);
             }
 }
