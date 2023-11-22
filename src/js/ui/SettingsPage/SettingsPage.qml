@@ -103,6 +103,10 @@ Page {
                 id: debugModeItem
                 title: "Debug mode"
             }
+            SelectionListItem {
+                id: tlsItem
+                title: "https mode"
+            }
         }
     }
 }

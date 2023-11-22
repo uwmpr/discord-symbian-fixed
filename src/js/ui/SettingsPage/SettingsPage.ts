@@ -6,10 +6,13 @@ declare const cdnProxyUrlItem: Qml.ListItem;
 declare const proxyUrlItem: Qml.ListItem;
 declare const dialogField: Qml.TextField;
 declare const debugModeItem: Qml.SelectionListItem;
+declare const tlsItem: Qml.SelectionListItem;
 declare const proxydscItem: Qml.ListItem;
-
+const sets = Settings.get("https");
 function loadSettings() {
     debugModeItem.subTitle = Settings.get("debug") ? "Enabled" : "Disabled";
+    tlsItem.subTitle = Settings.get("https") ? "Enabled" : "Disabled";
+    
 }
 
 function handleReady() {
@@ -52,11 +55,15 @@ function handleReady() {
         property = "proxydsc";
         dialog.open();
     });
+    
 
     debugModeItem.clicked.connect(() => {
         Settings.set("debug", !Settings.get("debug"));
         loadSettings();
     });
-
+    tlsItem.clicked.connect(() => {
+        Settings.set("https", !Settings.get("https"));
+        loadSettings();
+    });
     loadSettings();
 }

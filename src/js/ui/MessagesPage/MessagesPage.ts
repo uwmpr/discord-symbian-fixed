@@ -9,6 +9,14 @@ declare const sendButton: Qml.ToolButton;
 declare const inputField: Qml.TextArea;
 declare const msgListItem: Qml.Component;
 const dscproxyaddr = Settings.get("proxydsc");
+const dscproxyprotocol = Settings.get("https");
+function sethttpscheck(){
+    if(dscproxyprotocol){
+        return "https";
+    }else{
+        return "http";
+    }
+}
 function endsWith(str: string, suffixes: string[]) {
     for (var i = 0; i < suffixes.length; i++) {
         var suffix = suffixes[i];
@@ -23,7 +31,7 @@ function sendMessage(content: string) {
     inputField.text = "";
     Http.request<MessageDto[]>({   
         method: "POST",
-        path: `http://${dscproxyaddr}/api/v9/channels/${msgPage.channelId}/messages`,
+        path: `${sethttpscheck()}://${dscproxyaddr}/api/v9/channels/${msgPage.channelId}/messages`,
         body: `{\"content\":\"${content}\"}`
     }, (err, messages) => null);
 }
@@ -81,7 +89,7 @@ function loadMessages() {
     msgListModel.clear();
     Http.request<MessageDto[]>({
         method: "GET",
-        path: `http://${dscproxyaddr}/api/v9/channels/${msgPage.channelId}/messages?limit=50`,
+        path: `${sethttpscheck()}://${dscproxyaddr}/api/v9/channels/${msgPage.channelId}/messages?limit=50`,
     }, (err, messages) => {
         if (err || !messages) return;
         messages.reverse().forEach(msg => appendMessage(msg));

@@ -4,7 +4,8 @@ export const defaultSettings: Settings = {
     autoConnect: false,
     cdnProxyUrl: "cdndsc.uwmpr.pl:80",
     proxyUrl: "uwmpr.pl:8080",
-    proxydsc: "discord.uwmpr.pl:80"
+    proxydsc: "discord.uwmpr.pl:80",
+    https: false
 };
 
 export type Settings = {
@@ -14,6 +15,7 @@ export type Settings = {
     cdnProxyUrl: string
     proxyUrl: string
     proxydsc: string
+    https: boolean
 };
 
 export const Settings = {
