@@ -19,10 +19,6 @@ PageStackWindow {
                 text: "clear all notifications"
             }
             MenuItem {
-                id: loginButton
-                text: "spadaj"
-            }
-            MenuItem {
                 id: settingsButton
                 text: "Settings"
             }

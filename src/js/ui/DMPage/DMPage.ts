@@ -1,6 +1,5 @@
 import { Settings } from "store/Settings";
 import { PrivateChannel } from "structures/PrivateChannel";
-
 type DmListItem = {
     id: string
     userId: string
@@ -41,6 +40,7 @@ function loadChannels() {
 }
 
 function handleReady() {
+
     setTimeout(() => {
         window.client.on("ready", loadChannels);
     });

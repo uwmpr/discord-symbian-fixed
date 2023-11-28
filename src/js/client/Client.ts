@@ -1,3 +1,4 @@
+import { Servers } from "structures/Servers";
 import { PrivateChannel } from "../structures/PrivateChannel";
 import { User } from "../structures/User";
 import { ClientEventCallbackArgs, ClientEvents } from "./ClientEvents";
@@ -7,6 +8,7 @@ export class Client {
     private listeners: Partial<Record<ClientEvents, (() => void)[]>> = {};
 
     privateChannels: Record<string, PrivateChannel> = {};
+    Servers: Record<string, Servers> = {};
     token?: string;
     user?: User;
     users: Record<string, User> = {};
