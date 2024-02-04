@@ -107,6 +107,10 @@ Page {
                 id: tlsItem
                 title: "https mode"
             }
+             SelectionListItem {
+                id: autoConnectItem
+                title: "Auto Connect after app start"
+            }
         }
     }
 }

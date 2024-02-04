@@ -25,6 +25,8 @@ function loadGlobalScope() {
 
 function handleReady() {
     loadGlobalScope();
+    const autoConnect = Settings.get("autoConnect");
+    const token = Settings.get("token");
 
     symbian.foregroundChanged.connect(() => {
         window.client.setBackground(!symbian.foreground);
@@ -34,8 +36,9 @@ function handleReady() {
         Qt.quit();
     });
 
+
     loginButton.clicked.connect(() => {
-        const token = Settings.get("token");
+
 
         if (token) {
             window.client.login(token);
@@ -45,7 +48,6 @@ function handleReady() {
         }
     });
 
-    
 
     settingsButton.clicked.connect(() => {
         window.pageStack.push(
@@ -60,6 +62,7 @@ function handleReady() {
     minimizeButton.clicked.connect(() => {
         avkon.minimize();
     });
+
     clearAllNotBut.clicked.connect(() => {
         avkon.clearAllNot();
     });
@@ -98,4 +101,9 @@ function handleReady() {
     dmPage.createObject(window);
 
     window.initialPage = dmPage;
+
+    if(autoConnect && token){
+        window.client.login(token);
+
+    }
 }
