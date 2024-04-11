@@ -17,7 +17,7 @@ Page {
     tools: ToolBarLayout {
         ToolButton { iconSource: "toolbar-back"; onClicked: pageStack.pop() }
         ToolButton { iconSource: "toolbar-search" }
-        ToolButton { iconSource: "toolbar-add" }
+        ToolButton { iconSource: "toolbar-add"; onClicked: Js.sendFileClick() }
         ToolButton { iconSource: "toolbar-menu" }
     }
     

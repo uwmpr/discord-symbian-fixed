@@ -1,5 +1,5 @@
 #include "Socket.h"
-
+#include "AvkonHelper.h"
 Socket::Socket() {
     buffer = new QByteArray();
 }
@@ -7,6 +7,7 @@ Socket::Socket() {
 Socket::~Socket() {
 
 }
+
 
 void Socket::error(QAbstractSocket::SocketError error) {
     qDebug() << error;
@@ -33,7 +34,6 @@ void Socket::readyRead() {
 
 void Socket::connectToServer(QString host, int port) {
     socket = new QSslSocket(this);
-    connect(socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(error(QAbstractSocket::SocketError)));
     connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
     connect(socket, SIGNAL(sslErrors(QList<QSslError>)), this, SLOT(sslHandshakeFailure(QList<QSslError>)));
     socket->setProtocol(QSsl::AnyProtocol);
@@ -41,8 +41,11 @@ void Socket::connectToServer(QString host, int port) {
     socket->connectToHostEncrypted(host, port);
     if (!socket->waitForEncrypted())
         qWarning() << "Error:" << socket->errorString();
+    connect(socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
+
 }
 
 void Socket::send(QString message) {
     socket->write((message + "\n").toUtf8());
 }
+

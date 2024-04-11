@@ -3,7 +3,7 @@
 
 #include <QtNetwork/QSslSocket>
 #include <QSslCipher>
-
+#include "AvkonHelper.h"
 class Socket : public QObject
 {
     Q_OBJECT
@@ -21,6 +21,7 @@ signals:
 private:
     QSslSocket *socket;
     QByteArray *buffer;
+    AvkonHelper *avkon;
 };
 
 #endif // CLIENT_H

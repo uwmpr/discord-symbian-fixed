@@ -49,7 +49,22 @@ Page {
                     }
                 }
             }
-
+            ListItem {
+                id: sendProxy
+                Column {
+                    anchors.fill: tokenItem.paddingItem
+                    ListItemText {
+                        mode: SendItem.mode
+                        role: "Title"
+                        text: "Send proxy adress"
+                    }
+                    ListItemText {
+                        mode: SendItem.mode
+                        role: "SubTitle"
+                        text: "Send file proxy "
+                    }
+                }
+            }
             ListItem {
                 id: cdnProxyUrlItem
                 Column {

@@ -15,6 +15,7 @@ DEPLOYMENT.display_name = Discord
 ICON = assets/logo.svg
 
 QT += network sql
+ QT += webkit
 
 CONFIG += debug mobility qt-components
 
@@ -29,13 +30,15 @@ HEADERS += \
     src/cpp/Socket.h \
     src/cpp/Http.h \
     src/cpp/AvkonHelper.h \
-    pigler/sym-library/inc/PinglerAPI.h
+    pigler/sym-library/inc/PinglerAPI.h \
+    src/cpp/sendfile.h
 
 SOURCES += \
     src/main.cpp \
     src/cpp/Socket.cpp \
     src/cpp/Http.cpp \
-    src/cpp/AvkonHelper.cpp
+    src/cpp/AvkonHelper.cpp \
+    src/cpp/sendfile.cpp
 
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 include(pigler/qt-library/pigler.pri)

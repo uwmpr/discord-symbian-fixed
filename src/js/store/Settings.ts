@@ -1,4 +1,5 @@
 export const defaultSettings: Settings = {
+    send: "",
     token: "",
     debug: false,
     autoConnect: false,
@@ -13,6 +14,7 @@ export type Settings = {
     debug: boolean
     autoConnect: boolean
     cdnProxyUrl: string
+    send: string
     proxyUrl: string
     proxydsc: string
     https: boolean

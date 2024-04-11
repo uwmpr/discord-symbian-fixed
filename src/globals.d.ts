@@ -19,6 +19,10 @@ interface HttpClient {
     request(method: string, path: string, auth: string, body: string): void
     requestFinished: QSignal<string>
 }
+interface SendFile {
+    sendFile(token: string, channel_id: string, send: string): void
+
+}
 
 interface QmlApplicationViewer {
     hide(): void
@@ -185,6 +189,7 @@ const avkon: AvkonHelper;
 const socket: Socket;
 const http: HttpClient;
 const viewer: QmlApplicationViewer;
+const sendfile: SendFile;
 
 const ListView: {
     Beginning: number

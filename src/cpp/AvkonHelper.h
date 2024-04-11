@@ -3,8 +3,9 @@
 
 #include <QString>
 #include <QObject>
-#include "pigler/qt-library/inc/QPiglerAPI.h"
-
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+class QPiglerAPI;
 
 class QDeclarativeView;
 
@@ -19,15 +20,19 @@ public:
     void init();
     void log(QString str);
     Q_INVOKABLE void clearAllNot();
+    void gatewaydiscon();
+    QPiglerAPI *api;
+
 public slots:
         void cleanLastMsg() { lastPopup=""; }
 
 
+
 private:
+    QNetworkAccessManager *manager;
     QDeclarativeView *m_view;
     QString lastPopup;
     bool _switchToApp;
-    QPiglerAPI api;
 };
 
 #endif // AVKONHELPER_H

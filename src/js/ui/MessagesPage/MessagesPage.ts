@@ -10,6 +10,8 @@ declare const inputField: Qml.TextArea;
 declare const msgListItem: Qml.Component;
 const dscproxyaddr = Settings.get("proxydsc");
 const dscproxyprotocol = Settings.get("https");
+const token = Settings.get("token");
+const send = Settings.get("send");
 function sethttpscheck(){
     if(dscproxyprotocol){
         return "https";
@@ -121,5 +123,7 @@ function handleReady() {
         sendMessage(inputField.text);
     });
 }
-
+function sendFileClick(){
+    sendfile.sendFile(token, String(msgPage.channelId), send)
+}
 

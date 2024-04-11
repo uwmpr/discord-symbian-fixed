@@ -2,6 +2,7 @@
 #include <QNetworkRequest>
 #include <QDebug>
 #include <QSslConfiguration>
+#include <QObject>
 
 Http::Http() {
     qDebug() << "Created HTTP instance.";
@@ -39,3 +40,4 @@ void Http::request(QString method, QString url, QString auth, QString body) {
     sslConfguration.setProtocol(QSsl::AnyProtocol);
     reply->setSslConfiguration(sslConfguration);
 }
+

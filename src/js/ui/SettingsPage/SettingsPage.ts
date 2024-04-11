@@ -2,6 +2,7 @@ import { Settings } from "store/Settings";
 
 declare const dialog: Qml.CommonDialog;
 declare const tokenItem: Qml.ListItem;
+declare const sendProxy: Qml.ListItem;
 declare const cdnProxyUrlItem: Qml.ListItem;
 declare const proxyUrlItem: Qml.ListItem;
 declare const dialogField: Qml.TextField;
@@ -34,6 +35,13 @@ function handleReady() {
         dialogField.text = Settings.get("token") ?? "";
         dialogField.placeholderText = "";
         property = "token";
+        dialog.open();
+    });
+    sendProxy.clicked.connect(() => {
+        dialog.titleText = "Token";
+        dialogField.text = Settings.get("send") ?? "";
+        dialogField.placeholderText = "";
+        property = "send";
         dialog.open();
     });
 

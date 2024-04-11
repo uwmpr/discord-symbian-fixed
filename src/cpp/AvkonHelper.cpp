@@ -5,12 +5,29 @@
 #include <aknglobalnote.h>
 #include <aknappui.h>
 #endif
-
+ #include <cstdlib>
 #include <QTimer>
 #include <QString>
 #include <QtDeclarative/QDeclarativeView>
+#include <qdebug.h>
+#include "QPiglerAPI.h"
+#include <QNetworkRequest>
+#include <QUrl>
+#include <QNetworkReply>
+#include <QObject>
+AvkonHelper::AvkonHelper(QDeclarativeView *view, QObject *parent) : QObject(parent), m_view(view), api(new QPiglerAPI(this)) {
+qint32 response = api->init("dfs");
 
-AvkonHelper::AvkonHelper(QDeclarativeView *view, QObject *parent) : QObject(parent), m_view(view) {}
+if(response < 0) {
+       log("API init error: " + QString::number(response));
+       api->deleteLater();
+       api = NULL;
+   } else if (response > 0) {
+       log("API initialized. Got missed notification: " + QString::number(response));
+   } else {
+       log("API initialized: " + api->appName());
+   }
+}
 
 #ifdef USE_AVKON
 const TUid DiscordUid = {0xEA2EE72D};
@@ -28,24 +45,34 @@ void AvkonHelper::showPopup(QString title, QString message) {
     } else TRAP_IGNORE(CAknDiscreetPopup::ShowGlobalPopupL(convertToSymbianString(title), convertToSymbianString(message),KAknsIIDNone, KNullDesC, 0, 0, KAknDiscreetPopupDurationLong, 0, NULL));
     QTimer::singleShot(2000,this,SLOT(cleanLastMsg()));
 #endif
-    qint32 uid = api.createNotification(title, message);
+   qint32 uid = api->createNotification(title, message);
 
             if(uid > 0) {
-                static QImage piglerImage(":/assets/logo.png");
-                api.setNotificationIcon(uid, piglerImage);
+               static QImage piglerImage(":/assets/logo.png");
+                api->setNotificationIcon(uid, piglerImage);
             }
+
 }
 void AvkonHelper::minimize() const {
     m_view->lower();
 }
 
+
 void AvkonHelper::init(){
 
 
-    qint32 response = api.init();
+    //qint32 response = api->init();
 
 
 }
 void AvkonHelper::clearAllNot(){
-    api.removeAllNotifications();
+    api->removeAllNotifications();
 }
+
+void AvkonHelper::log(QString str)
+{
+
+    qDebug() << str;
+}
+
+
