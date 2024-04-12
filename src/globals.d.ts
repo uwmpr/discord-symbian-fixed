@@ -20,7 +20,7 @@ interface HttpClient {
     requestFinished: QSignal<string>
 }
 interface SendFile {
-    sendFile(token: string, channel_id: string, send: string): void
+    sendFile(token: string, channel_id: string, sendProxy: string): void
 
 }
 

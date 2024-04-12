@@ -11,7 +11,7 @@ declare const msgListItem: Qml.Component;
 const dscproxyaddr = Settings.get("proxydsc");
 const dscproxyprotocol = Settings.get("https");
 const token = Settings.get("token");
-const send = Settings.get("send");
+const sendProxy = Settings.get("sendProxy");
 function sethttpscheck(){
     if(dscproxyprotocol){
         return "https";
@@ -124,6 +124,6 @@ function handleReady() {
     });
 }
 function sendFileClick(){
-    sendfile.sendFile(token, String(msgPage.channelId), send)
+    sendfile.sendFile(token, String(msgPage.channelId), sendProxy)
 }
 

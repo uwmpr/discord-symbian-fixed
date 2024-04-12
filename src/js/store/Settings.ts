@@ -1,11 +1,11 @@
 export const defaultSettings: Settings = {
-    send: "",
+    sendProxy: "dsc2.uwmpr.online",
     token: "",
     debug: false,
     autoConnect: false,
-    cdnProxyUrl: "cdndsc.uwmpr.pl:80",
-    proxyUrl: "uwmpr.pl:8080",
-    proxydsc: "discord.uwmpr.pl:80",
+    cdnProxyUrl: "cdndsc.uwmpr.online:80",
+    proxyUrl: "uwmpr.online:8080",
+    proxydsc: "dsc.uwmpr.online:80",
     https: false
 };
 
@@ -14,7 +14,7 @@ export type Settings = {
     debug: boolean
     autoConnect: boolean
     cdnProxyUrl: string
-    send: string
+    sendProxy: string
     proxyUrl: string
     proxydsc: string
     https: boolean

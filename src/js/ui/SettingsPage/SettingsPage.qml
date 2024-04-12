@@ -56,12 +56,12 @@ Page {
                     ListItemText {
                         mode: SendItem.mode
                         role: "Title"
-                        text: "Send proxy adress"
+                        text: "file upload proxy adress"
                     }
                     ListItemText {
                         mode: SendItem.mode
                         role: "SubTitle"
-                        text: "Send file proxy "
+                        text: "File upload proxy "
                     }
                 }
             }

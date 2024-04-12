@@ -12,16 +12,15 @@ class SendFile : public QObject
     Q_OBJECT
 public:
     explicit SendFile(QObject *parent = 0);
-    Q_INVOKABLE void sendFile(QString token, QString channel_id, QString send);
+    Q_INVOKABLE void sendFile(QString token, QString channel_id, QString sendProxy);
 
 signals:
 
 public slots:
     void sendfileslot(QNetworkReply*);
-    //void finished(QNetworkReply*);
 private:
     QNetworkAccessManager manager;
-    QWebView view;
+
 
 };
 

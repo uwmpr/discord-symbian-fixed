@@ -4,18 +4,23 @@
 #include <QSslConfiguration>
 #include <QObject>
 #include <QtWebKit/QWebView>
+#include <QFileDialog>
+#include <QFile>
+#include <QMessageBox>
 SendFile::SendFile(QObject *parent) :
     QObject(parent)
 {
     QObject::connect(&manager, SIGNAL(finished(QNetworkReply*)),
              this, SLOT(sendfileslot(QNetworkReply*)));
-}
-void SendFile::sendFile(QString token, QString channel_id){
-    qDebug() << token + channel_id;
 
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
-                                                    "",
-                                                    tr(""));
+}
+void SendFile::sendFile(QString token, QString channel_id, QString sendProxy){
+
+        QNetworkReply *reply;
+
+    //qDebug() << token + channel_id;
+
+    QString fileName = QFileDialog::getOpenFileName();
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)){
         qDebug() << file.readAll();
@@ -43,12 +48,25 @@ void SendFile::sendFile(QString token, QString channel_id){
         qDebug() << data;
     QNetworkRequest request;
 
-     request.setUrl(QUrl("http://" + send + "/upload/" + channel_id));
-     request.setRawHeader("auth", token);
+    request.setUrl(QUrl("http://" + sendProxy + "/upload/" + channel_id + "/"));
+     request.setRawHeader("auth", token.toUtf8());
     request.setRawHeader("Content-Type", "multipart/form-data; boundary=---------------------------128617665714537629864265828537");
-    QNetworkReply *reply = manager.get(request);
+    //qDebug() << "http://" + sendProxy + "/upload/" + channel_id + "/";
+    reply = manager.post(request, data);
+
+
 
 }
 void SendFile::sendfileslot(QNetworkReply* reply){
-    qDebug() << reply->readAll();
+
+    QMessageBox msgbox;
+    if(reply->readAll() == "file sent!"){
+        msgbox.setText("File sent!");
+        msgbox.exec();
+    }else {
+        msgbox.setText("Failed to sent file");
+        msgbox.exec();
+    }
+
 }
+

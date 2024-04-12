@@ -38,10 +38,10 @@ function handleReady() {
         dialog.open();
     });
     sendProxy.clicked.connect(() => {
-        dialog.titleText = "Token";
-        dialogField.text = Settings.get("send") ?? "";
+        dialog.titleText = "File upload";
+        dialogField.text = Settings.get("sendProxy") ?? "";
         dialogField.placeholderText = "";
-        property = "send";
+        property = "sendProxy";
         dialog.open();
     });
 
