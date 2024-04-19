@@ -7,6 +7,7 @@ interface Socket {
     send(payload: string): void
 
     messageReceived: QSignal<string>
+    errors: QSignal<string>
 }
 
 interface AvkonHelper {

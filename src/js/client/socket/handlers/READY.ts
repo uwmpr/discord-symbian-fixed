@@ -1,4 +1,4 @@
-import { Servers } from "structures/Servers";
+import { Guilds } from "../../../structures/Guilds";
 import { ReadyEventDto } from "../../../structures/dto/events/Ready";
 import { Payload } from "../../../structures/dto/Payload";
 import { PrivateChannel } from "../../../structures/PrivateChannel";
@@ -14,12 +14,7 @@ export function READY(client: Client, { d: data }: Payload<ReadyEventDto>) {
         client.users[recipient.id] = new User(client, recipient);
         client.privateChannels[channel.id] = new PrivateChannel(client, channel);
     });
-    /*
-    data.servers.forEach(server => {
-        client.Servers[server.icon] = new Servers(client, server);
-
-    });
-*/
+   
 
     client.emit("ready");
 }

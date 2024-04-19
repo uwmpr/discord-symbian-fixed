@@ -29,6 +29,8 @@ public slots:
 
 
 private:
+        void showNot(QString title, QString message);
+        qint32 uid;
     QNetworkAccessManager *manager;
     QDeclarativeView *m_view;
     QString lastPopup;

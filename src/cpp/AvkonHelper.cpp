@@ -45,18 +45,20 @@ void AvkonHelper::showPopup(QString title, QString message) {
     } else TRAP_IGNORE(CAknDiscreetPopup::ShowGlobalPopupL(convertToSymbianString(title), convertToSymbianString(message),KAknsIIDNone, KNullDesC, 0, 0, KAknDiscreetPopupDurationLong, 0, NULL));
     QTimer::singleShot(2000,this,SLOT(cleanLastMsg()));
 #endif
-   qint32 uid = api->createNotification(title, message);
+   showNot(title, message);
 
-            if(uid > 0) {
-               static QImage piglerImage(":/assets/logo.png");
-                api->setNotificationIcon(uid, piglerImage);
-            }
 
 }
 void AvkonHelper::minimize() const {
     m_view->lower();
 }
-
+void AvkonHelper::showNot(QString title, QString message){
+    uid = api->createNotification(title, message);
+    if(uid > 0) {
+       static QImage piglerImage(":/assets/logo.png");
+        api->setNotificationIcon(uid, piglerImage);
+    }
+}
 
 void AvkonHelper::init(){
 

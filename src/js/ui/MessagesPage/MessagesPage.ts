@@ -78,7 +78,6 @@ function appendMessage(msg: MessageDto) {
             ? `http://${cdnProxyUrl}/avatars/${msg.author.id}/${msg.author.avatar}.jpg?size=40`
             : `http://${cdnProxyUrl}/embed/avatars${+msg.author.discriminator % 5}.png`,
         content: markdown(msg.content + filecheck()).replace(URL_REGEXP, url => `<a href='${url}'>${url}</a>`),
-        voicemessurl: "commingsoon!",
         time: Qt.formatDateTime(date, "h:mm:ss AP, dd.MM.yyyy"),
         imgurl,
         

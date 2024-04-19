@@ -19,6 +19,10 @@ export class SocketManager {
         socket.messageReceived.connect(msg => {
             this.isBackground ? this.handleBackgroundMessage(msg) : this.handleMessage(msg);
         });
+        socket.errors.connect( msg => {
+            console.log("Socket error")
+            avkon.showPopup("TCP Socket", "Disconected")
+        });
     }
 
     send(payload: Payload) {
