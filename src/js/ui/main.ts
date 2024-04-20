@@ -3,6 +3,7 @@ import { DatabaseStore } from "store/DatabaseStore";
 import { Settings } from "store/Settings";
 
 declare const backButton: Qml.ToolButton;
+declare const switchGuildsButton: Qml.ToolButton;
 declare const loginButton: Qml.ToolButton;
 declare const settingsButton: Qml.ToolButton;
 declare const menuButton: Qml.ToolButton;
@@ -35,7 +36,11 @@ function handleReady() {
     backButton.clicked.connect(() => {
         Qt.quit();
     });
-
+ switchGuildsButton.clicked.connect(() => {
+    window.pageStack.push(
+       Qt.resolvedUrl("GuildPage/GuildPage.qml")
+   );
+ });
 
     loginButton.clicked.connect(() => {
 
@@ -50,7 +55,7 @@ function handleReady() {
 
 
     settingsButton.clicked.connect(() => {
-        window.pageStack.push(
+       window.pageStack.push(
             Qt.resolvedUrl("SettingsPage/SettingsPage.qml")
         );
     });

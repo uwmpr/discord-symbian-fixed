@@ -3,12 +3,14 @@ import { PrivateChannel } from "../structures/PrivateChannel";
 import { User } from "../structures/User";
 import { ClientEventCallbackArgs, ClientEvents } from "./ClientEvents";
 import { SocketManager } from "./socket/SocketManager";
+import { GuildsChannels } from "structures/GuildsChannels";
 
 export class Client {
     private listeners: Partial<Record<ClientEvents, (() => void)[]>> = {};
 
     privateChannels: Record<string, PrivateChannel> = {};
     guild: Record<string, Guilds> = {};
+    guildChannels: Record<string, GuildsChannels> = {};
     token?: string;
     user?: User;
     users: Record<string, User> = {};

@@ -30,6 +30,10 @@ PageStackWindow {
         id: menu
         content: MenuLayout {
             MenuItem {
+                id: switchGuildsButton
+                text: "swith servers/DMs"
+            }
+            MenuItem {
                 id: clearAllNotBut
                 text: "clear all notifications"
             }
