@@ -51,7 +51,7 @@ Page {
             onPressed: {
                 guildListView.currentIndex = index;
             }
-            onClicked: Js.openGuild()
+            onClicked: Js.openGuild(guildf)
             Row {
                 spacing: 10
                 Image {

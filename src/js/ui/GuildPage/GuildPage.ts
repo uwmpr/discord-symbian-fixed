@@ -1,6 +1,5 @@
 import { Settings } from "store/Settings";
 import { Guilds } from "structures/Guilds";
-import { GuildsChannels } from "structures/GuildsChannels";
 
 type GuildListItem = {
     name: string
@@ -16,7 +15,9 @@ function loadGuilds(){
     
     Guilds.forEach(guild => {
         const guildinf: Guilds = window.client.guild[guild];
+        
         const item = {
+            guildf: guild,
             id: guildinf.id,
             icon: `http://${cdnProxyUrl}/icons/${guildinf.id}/${guildinf.icon}.jpg?size=40`,
             name: guildinf.name
@@ -32,7 +33,12 @@ function handleReady() {
 
     loadGuilds();
 }
-function openGuild(){
-    const Guildschannels = Object.keys(window.client.guild);
+function openGuild(guildf: string){
+    window.pageStack.push(
+        Qt.resolvedUrl("../GuildChannelsPage/GuildChannelsPage.qml"),
+        {
+            guildId: guildf
+        }
+    );
     
 }
