@@ -51,7 +51,7 @@ Page {
             onPressed: {
                 guildChannelsListView.currentIndex = index;
             }
-            //onClicked: Js.openMessages(id)
+            onClicked: Js.openMessages(id, name)
             Row {
                 spacing: 10
                 
