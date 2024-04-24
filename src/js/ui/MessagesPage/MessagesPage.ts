@@ -135,6 +135,6 @@ function sendFileClick(){
     sendfile.sendFile(token, String(msgPage.channelId), sendProxy)
 }
 function Off(){
-    window.client.off("message", handleReady);
+    window.client.off("message", handleMessage);
 }
 
