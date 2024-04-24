@@ -8,6 +8,7 @@ declare const msgListView: Qml.ListView;
 declare const sendButton: Qml.ToolButton;
 declare const inputField: Qml.TextArea;
 declare const msgListItem: Qml.Component;
+var ChId: string | undefined;
 const dscproxyaddr = Settings.get("proxydsc");
 const dscproxyprotocol = Settings.get("https");
 const token = Settings.get("token");
@@ -39,6 +40,7 @@ function sendMessage(content: string) {
 }
 
 function appendMessage(msg: MessageDto) {
+
     const cdnProxyUrl = Settings.get("cdnProxyUrl");
     const splitTimestamp = msg.timestamp.split("T");
     const [year, month, day] = splitTimestamp[0].split("-");
@@ -88,6 +90,7 @@ function appendMessage(msg: MessageDto) {
 
 function loadMessages() {
     msgListModel.clear();
+    ChId = msgPage.channelId;
     Http.request<MessageDto[]>({
         method: "GET",
         path: `${sethttpscheck()}://${dscproxyaddr}/api/v9/channels/${msgPage.channelId}/messages?limit=50`,
@@ -97,10 +100,15 @@ function loadMessages() {
         msgListView.positionViewAtIndex(messages.length - 1, ListView.End);
         
     });
+    
 }
 
 function handleMessage(msg: MessageDto) {
-    if (msg.channel_id === msgPage.channelId) {
+
+    console.log(msg.channel_id)
+    console.log(ChId)
+    
+        if (msg.channel_id === ChId) {
         appendMessage(msg);
         msgListView.positionViewAtIndex(msgListView.count - 1, ListView.End);
     }
@@ -110,6 +118,7 @@ function handleReady() {
     setTimeout(() => {
         loadMessages();
         window.client.on("message", handleMessage);
+       
     });
 
     inputField.implicitHeightChanged.connect(() => {
@@ -124,5 +133,8 @@ function handleReady() {
 }
 function sendFileClick(){
     sendfile.sendFile(token, String(msgPage.channelId), sendProxy)
+}
+function Off(){
+    window.client.off("message", handleReady);
 }
 

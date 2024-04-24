@@ -87,9 +87,11 @@ function handleReady() {
             && (!msg.guild_id || msg.mentions.some(m => m.id === window.client.user!.id))
         ) {
             if (symbian.foreground) {
+                
                 banner.text = `<b>${msg.author.username}</b><br />${msg.content}`;
                 banner.open();
                 hapticsEffect.running = true;
+                
             } else {
                 avkon.showPopup(msg.author.username, msg.content);
 
