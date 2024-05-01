@@ -7,4 +7,5 @@ export interface ReadyEventDto {
     user: UserDto
     private_channels: PrivateChannelDto[]
     guilds: GuildsDto[]
+    session_id: string
 }

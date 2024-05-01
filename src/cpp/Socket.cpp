@@ -12,7 +12,7 @@ Socket::~Socket() {
 
 
 void Socket::error() {
-    qDebug() << "error";
+    socket->disconnectFromHost();
     errors();
 }
 
@@ -43,6 +43,7 @@ void Socket::connectToServer(QString host, int port) {
     socket->ignoreSslErrors();
     socket->connectToHostEncrypted(host, port);
     if (!socket->waitForEncrypted())
+        error();
         qWarning() << "Error:" << socket->errorString();
     connect(socket, SIGNAL(disconnected()), this, SLOT(error()));
     //connect(aSocket, SIGNAL(error ( QAbstractSocket::SocketError )), this, SLOT(error()));

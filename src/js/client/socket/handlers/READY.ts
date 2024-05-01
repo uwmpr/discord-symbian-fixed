@@ -8,6 +8,7 @@ import { Client } from "../../Client";
 export function READY(client: Client, { d: data }: Payload<ReadyEventDto>) {
     if (!data) return;
     client.user = new User(client, data.user);
+    client.session_id = data.session_id;
     data.private_channels.forEach(channel => {
         const [recipient] = channel.recipients;
 
@@ -15,6 +16,7 @@ export function READY(client: Client, { d: data }: Payload<ReadyEventDto>) {
         client.privateChannels[channel.id] = new PrivateChannel(client, channel);
 
     });
+    
     data.guilds.forEach(element => {
         const [chId] = element.channels.map(ch => ch.id);
         const [chName] = element.channels.map(ch => ch.name);
@@ -24,6 +26,6 @@ export function READY(client: Client, { d: data }: Payload<ReadyEventDto>) {
         
     });
    
-
+    
     client.emit("ready");
 }

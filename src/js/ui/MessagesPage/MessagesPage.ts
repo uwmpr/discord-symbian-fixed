@@ -1,3 +1,4 @@
+import { Client } from "client/Client";
 import { Http } from "client/http/Http";
 import { Settings } from "store/Settings";
 import { MessageDto } from "structures/dto/Message";
@@ -90,6 +91,7 @@ function appendMessage(msg: MessageDto) {
 
 function loadMessages() {
     msgListModel.clear();
+    console.log(window.client.session_id)
     ChId = msgPage.channelId;
     Http.request<MessageDto[]>({
         method: "GET",

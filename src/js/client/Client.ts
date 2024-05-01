@@ -13,6 +13,10 @@ export class Client {
     user?: User;
     users: Record<string, User> = {};
     ws: SocketManager;
+    gatewaystatus?: boolean;
+    session_id?: string;
+    seq?: Int16Array;
+    reconnect?: boolean = false;
 
     constructor() {
         this.ws = new SocketManager(this);

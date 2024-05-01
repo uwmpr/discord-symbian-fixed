@@ -2,6 +2,7 @@ import { MessageAttachmentDto } from "./MessageAttachment";
 import { UserDto } from "./User";
 
 export interface MessageDto {
+    s: Int16Array
     id: string
     channel_id: string
     guild_id?: string

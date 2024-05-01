@@ -3,16 +3,16 @@ import { Settings } from "store/Settings";
 import { Payload } from "../../structures/dto/Payload";
 import { Client } from "../Client";
 import { handlers } from "./handlers/index";
+declare const banner: Qml.InfoBanner;
 
 export class SocketManager {
     private isBackground = false;
-
     constructor(private client: Client) { }
 
     connect() {
         const [host, port = "80"] = Settings.get("proxyUrl").split(":");
-
         socket.connectToServer(host, +port);
+        window.client.gatewaystatus = true
     }
 
     ready() {
@@ -20,16 +20,30 @@ export class SocketManager {
             this.isBackground ? this.handleBackgroundMessage(msg) : this.handleMessage(msg);
         });
         socket.errors.connect( msg => {
-            console.log("Socket error")
-            avkon.showPopup("TCP Socket", "Disconected")
+            window.client.gatewaystatus = false
+            console.log("Socket error");
+            socket.messageReceived.disconnect(msg => {});
+            window.client.reconnect = true
+            banner.text = `<b>TCP socket</b><br /> disconnected`;
+            banner.open();
+            setTimeout(() => {
+                if(window.client.reconnect){
+                    banner.text = `<b>TCP socket</b><br /> reconnecting...`;
+                    banner.open();
+                   this.connect();
+                }
+                
+            }, 5000); 
+                
         });
+
     }
 
     send(payload: Payload) {
         const json = JSON.stringify(payload);
-
+        if(window.client.gatewaystatus){
         this.client.emit("debug", "Sending payload: " + json);
-        socket.send(json);
+        socket.send(json);}
     }
 
     setBackground(bg: boolean) {
