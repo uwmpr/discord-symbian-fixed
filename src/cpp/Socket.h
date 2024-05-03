@@ -5,6 +5,7 @@
 #include <QAbstractSocket>
 #include <QSslCipher>
 #include "AvkonHelper.h"
+#include <QMessageBox>
 class Socket : public QObject
 {
     Q_OBJECT
@@ -25,6 +26,7 @@ private:
     QByteArray *buffer;
     AvkonHelper *avkon;
     QAbstractSocket *aSocket;
+    QMessageBox *msgBox;
 };
 
 #endif // CLIENT_H

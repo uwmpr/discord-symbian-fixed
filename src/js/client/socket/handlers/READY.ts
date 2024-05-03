@@ -16,7 +16,7 @@ export function READY(client: Client, { d: data }: Payload<ReadyEventDto>) {
         client.privateChannels[channel.id] = new PrivateChannel(client, channel);
 
     });
-    
+    window.client.readyZZ = true
     data.guilds.forEach(element => {
         const [chId] = element.channels.map(ch => ch.id);
         const [chName] = element.channels.map(ch => ch.name);

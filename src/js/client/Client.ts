@@ -17,6 +17,7 @@ export class Client {
     session_id?: string;
     seq?: Int16Array;
     reconnect?: boolean = false;
+    readyZZ?: boolean = false;
 
     constructor() {
         this.ws = new SocketManager(this);

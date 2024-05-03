@@ -42,9 +42,12 @@ void Socket::connectToServer(QString host, int port) {
     socket->setProtocol(QSsl::AnyProtocol);
     socket->ignoreSslErrors();
     socket->connectToHostEncrypted(host, port);
-    if (!socket->waitForEncrypted())
-        error();
+    if (!socket->waitForEncrypted()){
         qWarning() << "Error:" << socket->errorString();
+        if(socket->errorString() == "Host not found"){
+            error();
+        }
+     }
     connect(socket, SIGNAL(disconnected()), this, SLOT(error()));
     //connect(aSocket, SIGNAL(error ( QAbstractSocket::SocketError )), this, SLOT(error()));
 

@@ -27,12 +27,13 @@ export class SocketManager {
             banner.text = `<b>TCP socket</b><br /> disconnected`;
             banner.open();
             setTimeout(() => {
-                if(window.client.reconnect){
-                    banner.text = `<b>TCP socket</b><br /> reconnecting...`;
-                    banner.open();
-                   this.connect();
+                if(window.client.readyZZ){
+                    if(window.client.reconnect){
+                        banner.text = `<b>TCP socket</b><br /> reconnecting...`;
+                        banner.open();
+                    this.connect();
+                    }
                 }
-                
             }, 5000); 
                 
         });
