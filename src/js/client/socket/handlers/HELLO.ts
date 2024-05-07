@@ -20,9 +20,11 @@ export function HELLO(client: Client, { d: data }: Payload<HelloData>) {
             }
 
         });
-        window.client.reconnect = false;
+        
     banner.text = `<b>TCP socket</b><br /> reconnected`;
-    }else{
+    banner.open();
+
+        }else{
         client.ws.send({
             op: 2,
             d: {
@@ -36,12 +38,11 @@ export function HELLO(client: Client, { d: data }: Payload<HelloData>) {
             },
         });
     
-    banner.open();
+    
     }
-    window.client.reconnect = false;
 
     socket.errors.disconnect( msg => {});
-
+    client.reconnect = false;
 
     setInterval(() => {
         client.ws.send({

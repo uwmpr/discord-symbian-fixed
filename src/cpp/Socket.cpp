@@ -1,5 +1,4 @@
 #include "Socket.h"
-#include "AvkonHelper.h"
 
 Socket::Socket() {
     buffer = new QByteArray();
@@ -10,9 +9,12 @@ Socket::~Socket() {
 
 }
 
-
-void Socket::error() {
+void Socket::disconnectFromServer(){
     socket->disconnectFromHost();
+}
+
+void Socket::error(QAbstractSocket::SocketError tcperrror) {
+
     errors();
 }
 
@@ -44,12 +46,10 @@ void Socket::connectToServer(QString host, int port) {
     socket->connectToHostEncrypted(host, port);
     if (!socket->waitForEncrypted()){
         qWarning() << "Error:" << socket->errorString();
-        if(socket->errorString() == "Host not found"){
-            error();
-        }
+
      }
-    connect(socket, SIGNAL(disconnected()), this, SLOT(error()));
-    //connect(aSocket, SIGNAL(error ( QAbstractSocket::SocketError )), this, SLOT(error()));
+    //connect(socket, SIGNAL(disconnected()), this, SLOT(error()));
+    connect(socket, SIGNAL(error ( QAbstractSocket::SocketError )), this, SLOT(error(QAbstractSocket::SocketError)));
 
 
 }

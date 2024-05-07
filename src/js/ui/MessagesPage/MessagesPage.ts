@@ -91,7 +91,6 @@ function appendMessage(msg: MessageDto) {
 
 function loadMessages() {
     msgListModel.clear();
-    console.log(window.client.session_id)
     ChId = msgPage.channelId;
     Http.request<MessageDto[]>({
         method: "GET",
@@ -106,10 +105,6 @@ function loadMessages() {
 }
 
 function handleMessage(msg: MessageDto) {
-
-    console.log(msg.channel_id)
-    console.log(ChId)
-    
         if (msg.channel_id === ChId) {
         appendMessage(msg);
         msgListView.positionViewAtIndex(msgListView.count - 1, ListView.End);

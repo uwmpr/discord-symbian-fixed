@@ -1,4 +1,5 @@
 import { Client } from "client/Client";
+import { SocketManager } from "client/socket/SocketManager";
 import { DatabaseStore } from "store/DatabaseStore";
 import { Settings } from "store/Settings";
 
@@ -113,4 +114,12 @@ function handleReady() {
         window.client.login(token);
 
     }
+    setInterval(() => {
+        if(window.client.reconnect && window.client.readyZZ){
+            banner.text = `<b>TCP socket</b><br /> reconnecting...`;
+            banner.open();
+            window.client.ws.connect();
+           }
+       
+   }, 8000); 
 }

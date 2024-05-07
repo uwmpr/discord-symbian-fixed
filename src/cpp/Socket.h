@@ -1,11 +1,9 @@
-#ifndef CLIENT_H
+ #ifndef CLIENT_H
 #define CLIENT_H
 
 #include <QtNetwork/QSslSocket>
 #include <QAbstractSocket>
 #include <QSslCipher>
-#include "AvkonHelper.h"
-#include <QMessageBox>
 class Socket : public QObject
 {
     Q_OBJECT
@@ -14,8 +12,9 @@ public:
     ~Socket();
     Q_INVOKABLE void connectToServer(QString host, int port);
     Q_INVOKABLE void send(QString message);
+    Q_INVOKABLE void disconnectFromServer();
 public slots:
-    void error();
+    void error(QAbstractSocket::SocketError tcperror);
     void readyRead();
     void sslHandshakeFailure(QList<QSslError> errors);
 signals:
@@ -24,9 +23,7 @@ signals:
 private:
     QSslSocket *socket;
     QByteArray *buffer;
-    AvkonHelper *avkon;
-    QAbstractSocket *aSocket;
-    QMessageBox *msgBox;
+
 };
 
 #endif // CLIENT_H

@@ -26,15 +26,7 @@ export class SocketManager {
             window.client.reconnect = true
             banner.text = `<b>TCP socket</b><br /> disconnected`;
             banner.open();
-            setTimeout(() => {
-                if(window.client.readyZZ){
-                    if(window.client.reconnect){
-                        banner.text = `<b>TCP socket</b><br /> reconnecting...`;
-                        banner.open();
-                    this.connect();
-                    }
-                }
-            }, 5000); 
+            
                 
         });
 
@@ -42,9 +34,9 @@ export class SocketManager {
 
     send(payload: Payload) {
         const json = JSON.stringify(payload);
-        if(window.client.gatewaystatus){
+        
         this.client.emit("debug", "Sending payload: " + json);
-        socket.send(json);}
+        socket.send(json);
     }
 
     setBackground(bg: boolean) {

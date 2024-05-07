@@ -128,6 +128,7 @@ PageStackWindow {
     function setInterval(callback, timeout) {
         const timer = Qt.createQmlObject("import QtQuick 1.0; Timer {}", window);
 
+
         timer.interval = timeout || 1;
         timer.repeat = true;
         timer.triggered.connect(callback);

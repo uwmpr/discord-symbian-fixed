@@ -2,6 +2,7 @@ import { Payload } from "../../../structures/dto/Payload";
 import { Client } from "../../Client";
 
 export function GATEWAY_HELLO(client: Client, { d: data }: Payload) {
+    
     client.ws.send({
         op: -1,
         t: "GATEWAY_CONNECT",
@@ -10,4 +11,5 @@ export function GATEWAY_HELLO(client: Client, { d: data }: Payload) {
             url: "wss://gateway.discord.gg/?v=9&encoding=json",
         },
     });
+    
 }
