@@ -19,8 +19,9 @@ public slots:
     void sslHandshakeFailure(QList<QSslError> errors);
 signals:
     void messageReceived(QString message);
-    void errors();
+    void errors(qint8 gError);
 private:
+    qint8 gatewayError;
     QSslSocket *socket;
     QByteArray *buffer;
 

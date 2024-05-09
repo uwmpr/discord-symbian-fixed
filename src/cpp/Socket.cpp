@@ -14,8 +14,9 @@ void Socket::disconnectFromServer(){
 }
 
 void Socket::error(QAbstractSocket::SocketError tcperrror) {
-
-    errors();
+    qDebug() << tcperrror;
+    gatewayError = tcperrror;
+    errors(gatewayError);
 }
 
 void Socket::sslHandshakeFailure(QList<QSslError> errors) {
@@ -39,6 +40,7 @@ void Socket::readyRead() {
 
 void Socket::connectToServer(QString host, int port) {
     socket = new QSslSocket(this);
+    connect(socket, SIGNAL(error ( QAbstractSocket::SocketError )), this, SLOT(error(QAbstractSocket::SocketError)));
     connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
     connect(socket, SIGNAL(sslErrors(QList<QSslError>)), this, SLOT(sslHandshakeFailure(QList<QSslError>)));
     socket->setProtocol(QSsl::AnyProtocol);
@@ -49,7 +51,6 @@ void Socket::connectToServer(QString host, int port) {
 
      }
     //connect(socket, SIGNAL(disconnected()), this, SLOT(error()));
-    connect(socket, SIGNAL(error ( QAbstractSocket::SocketError )), this, SLOT(error(QAbstractSocket::SocketError)));
 
 
 }

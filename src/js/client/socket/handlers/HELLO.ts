@@ -10,7 +10,7 @@ export function HELLO(client: Client, { d: data }: Payload<HelloData>) {
     if (!data) {
         throw new Error("No data provided to the handler.");
     }
-    if(window.client.reconnect){ 
+    if(window.client.reconnect && window.client.readyZZ){ 
         client.ws.send({
             op: 6,
             d: {
@@ -47,7 +47,7 @@ export function HELLO(client: Client, { d: data }: Payload<HelloData>) {
     setInterval(() => {
         client.ws.send({
             op: 1,
-            d: null,
+            d: client.seq,
         });
     }, data.heartbeat_interval);
 }

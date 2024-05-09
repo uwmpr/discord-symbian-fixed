@@ -24,8 +24,61 @@ export class SocketManager {
             console.log("Socket error");
             socket.messageReceived.disconnect(msg => {});
             window.client.reconnect = true
-            banner.text = `<b>TCP socket</b><br /> disconnected`;
-            banner.open();
+            const msgInt: number = parseInt(msg, 10);
+            switch (msgInt){
+                case 0:
+                    banner.text = "ConnectionRefusedError";
+                    banner.open();
+                break;
+                case 1:
+                    banner.text = "RemoteHostClosedError";
+                    banner.open();
+                break;
+                case 2:
+                    banner.text = "HostNotFoundError";
+                    banner.open();
+                break;
+                case 3:
+                    banner.text = "SocketAccessError";
+                    banner.open();
+                break;
+                case 4:
+                    banner.text = "SocketResourceError";
+                    banner.open();
+                break;
+                case 5:
+                    banner.text = "SocketTimeoutError";
+                    banner.open();
+                break;
+                case 6:
+                    banner.text = "DatagramTooLargeError";
+                    banner.open();
+                break;
+                case 7:
+                    banner.text = " NetworkError";
+                    banner.open();
+                break;
+                case 8:
+                    banner.text = "AddressInUseError";
+                    banner.open();
+                break;
+                case 9:
+                    banner.text = "SocketAddressNotAvailableError";
+                    banner.open();
+                break;
+                case 11:
+                    banner.text = "UnfinishedSocketOperationError";
+                    banner.open();
+                break;
+                case 13:
+                    banner.text = "SslHandshakeFailedError";
+                    banner.open();
+                break;
+                default:
+                    banner.text = "other error";
+                    banner.open();
+                
+            }
             
                 
         });
