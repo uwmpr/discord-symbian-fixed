@@ -24,6 +24,7 @@ export class SocketManager {
             console.log("Socket error");
             socket.messageReceived.disconnect(msg => {});
             window.client.reconnect = true
+            socket.disconnectFromServer();
             const msgInt: number = parseInt(msg, 10);
             switch (msgInt){
                 case 0:

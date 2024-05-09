@@ -5,6 +5,7 @@ type QSignal<T = void> = {
 interface Socket {
     connectToServer(host: string, port: number): void
     send(payload: string): void
+    disconnectFromServer(): void
 
     messageReceived: QSignal<string>
     errors: QSignal<string>
