@@ -16,7 +16,7 @@ export function HELLO(client: Client, { d: data }: Payload<HelloData>) {
             d: {
                 token: client.token,
                 session_id: client.session_id,
-                seq: client.seq
+                seq: client.seq,
             }
 
         });

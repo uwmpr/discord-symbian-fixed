@@ -9,6 +9,7 @@ export function READY(client: Client, { d: data }: Payload<ReadyEventDto>) {
     if (!data) return;
     client.user = new User(client, data.user);
     client.session_id = data.session_id;
+    client.resume_gateway_url = data.resume_gateway_url;
     data.private_channels.forEach(channel => {
         const [recipient] = channel.recipients;
 

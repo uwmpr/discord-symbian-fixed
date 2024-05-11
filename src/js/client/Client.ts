@@ -15,9 +15,10 @@ export class Client {
     ws: SocketManager;
     gatewaystatus?: boolean;
     session_id?: string;
-    seq?: Int16Array;
+    seq?: number;
     reconnect?: boolean = false;
     readyZZ?: boolean = false;
+    resume_gateway_url?: string;
 
     constructor() {
         this.ws = new SocketManager(this);

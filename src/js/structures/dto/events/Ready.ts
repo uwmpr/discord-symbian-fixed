@@ -8,4 +8,5 @@ export interface ReadyEventDto {
     private_channels: PrivateChannelDto[]
     guilds: GuildsDto[]
     session_id: string
+    resume_gateway_url: string
 }
